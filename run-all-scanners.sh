@@ -5,13 +5,10 @@ echo "------ PROGRAM SKANUJĄCY ------"
 export SANE_DEBUG_MUSTEK_USB=0
 
 detected=(`scanimage -L | grep -oP '[a-z0-9]+:[a-z0-9]+:[0-9]{3}:[0-9]{3}'`)
-
+#declare -a detected=("element1" "element2" "element3")
 echo "WYKRYTYCH SKANERÓW: $detected"
 
 additional_options=""
-
-date=`date +%Y-%m-%d\_%H-%M-%S`
-file_path="${1}/$date"
 
 if [ ! -z "${2}" ]; then
 	additional_options+=" --resolution ${2}"
@@ -32,10 +29,12 @@ fi
 echo "zeskanowane obrazy zostaną umieszczone w katalogu $file_path"
 
 i=0
+
+date=`date +%Y-%m-%d`
+time=`date +%H:%M:%S`
 for scanner in "${detected[@]}"
 do
    echo "staring scanning with $scanner"
-   file_path+="_skaner_$i.pnm"
-   i+=1
-   eval "scanimage -d $scanner $additional_options > $file_path"
+   i=$((i + 1))
+   echo "${1}/${date}_skaner${i}_${time}.pnm"
 done
