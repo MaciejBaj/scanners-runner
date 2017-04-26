@@ -37,5 +37,5 @@ do
    echo "staring scanning with $scanner"
    i=$((i + 1))
    echo "${1}/${date}_skaner${i}_${time}.pnm"
-   eval "scanimage -d $scanner $additional_options > $file_path"
+   eval "scanimage -d $scanner $additional_options > ${1}/${date}_skaner${i}_${time}.pnm"
 done
