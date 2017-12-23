@@ -31,7 +31,7 @@ echo "zeskanowane obrazy zostaną umieszczone w katalogu $file_path"
 i=0
 
 date=`date +%Y-%m-%d`
-time=`date +%H:%M:%S`
+time=`date +%H_%M_%S`
 for scanner in "${detected[@]}"
 do
    echo "staring scanning with $scanner"
